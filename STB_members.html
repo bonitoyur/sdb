@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대원 현황 통계</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-1:       #2a78d6;
+    --series-1-soft:  #cde2fb;
+    --series-2:       #eb6834;
+    --series-3:       #1baf7a;
+    --series-4:       #eda100;
+    --good:           #006300;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --page:           #0d0d0d;
+      --surface-1:      #1a1a19;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --series-1:       #3987e5;
+      --series-1-soft:  #184f95;
+      --series-2:       #d95926;
+      --series-3:       #199e70;
+      --series-4:       #c98500;
+      --good:           #0ca30c;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 32px 20px 56px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0 0 28px;
+  }
+
+  /* stat tiles */
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .tile {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 16px;
+  }
+  .tile .label {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .tile .value {
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: proportional-nums;
+  }
+  .tile .sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  section {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px 24px;
+    margin-bottom: 20px;
+  }
+  section h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+  section .desc {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+  }
+
+  /* bar chart */
+  .chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 180px;
+    padding: 0 2px;
+    border-bottom: 1px solid var(--baseline);
+    position: relative;
+  }
+  .chart .gridlines {
+    position: absolute;
+    inset: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+  .bar-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    min-width: 0;
+  }
+  .bar-val {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .bar {
+    width: 60%;
+    max-width: 46px;
+    border-radius: 4px 4px 2px 2px;
+    background: var(--series-1);
+    transition: opacity 0.15s;
+  }
+  .bar-col:hover .bar { opacity: 0.75; }
+  .bar-col:hover .bar-val { color: var(--series-1); }
+  .bar.alt { background: var(--series-2); }
+  .bar-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+  }
+
+  /* grouped (2-series) bars */
+  .bar-pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 100%;
+  }
+  .bar-single {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .bar-single .bar {
+    width: 16px;
+    max-width: none;
+  }
+  .bar-single .bar-val {
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+  .bar-single.b .bar-val { color: var(--series-2); }
+  .bar-col:hover .bar-single .bar { opacity: 0.75; }
+
+  .legend {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 16px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+  .legend .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .legend .swatch.a { background: var(--series-1); }
+  .legend .swatch.b { background: var(--series-2); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: right;
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--gridline);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  th:first-child, td:first-child { text-align: left; }
+  th {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.hl { color: var(--series-1); font-weight: 700; }
+  td.pos { color: var(--good); }
+
+  .note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .tiles { grid-template-columns: repeat(2, 1fr); }
+    .tile .value { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>대원 현황 통계</h1>
+  <p class="subtitle">1기 ~ 7기 누적 데이터 기준</p>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">7기 전체 대원</div>
+      <div class="value">116명</div>
+      <div class="sub">누적 최대 인원</div>
+    </div>
+    <div class="tile">
+      <div class="label">7기 기존 대원 비율</div>
+      <div class="value">56.0%</div>
+      <div class="sub">65명 / 116명</div>
+    </div>
+    <div class="tile">
+      <div class="label">2기부터 연속 유지</div>
+      <div class="value">11명</div>
+      <div class="sub">최장기 활동 그룹</div>
+    </div>
+    <div class="tile">
+      <div class="label">7기 운영진</div>
+      <div class="value">22명</div>
+      <div class="sub">전체 대원 대비 19.0%</div>
+    </div>
+  </div>
+
+  <!-- 1. 전체 대원 수 + 운영진 수 -->
+  <section>
+    <h2>기수별 전체 대원 수 &amp; 운영진 수</h2>
+    <p class="desc">전체 대원 규모 대비 운영진 규모를 함께 확인</p>
+    <div class="legend">
+      <span class="item"><span class="swatch a"></span>전체 대원</span>
+      <span class="item"><span class="swatch b"></span>운영진</span>
+    </div>
+    <div class="chart">
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">30</div><div class="bar" style="height:25.9%"></div></div>
+        <div class="bar-single b"><div class="bar-val">4</div><div class="bar alt" style="height:3.4%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">50</div><div class="bar" style="height:43.1%"></div></div>
+        <div class="bar-single b"><div class="bar-val">10</div><div class="bar alt" style="height:8.6%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">91</div><div class="bar" style="height:78.4%"></div></div>
+        <div class="bar-single b"><div class="bar-val">18</div><div class="bar alt" style="height:15.5%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">109</div><div class="bar" style="height:94.0%"></div></div>
+        <div class="bar-single b"><div class="bar-val">15</div><div class="bar alt" style="height:12.9%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">106</div><div class="bar" style="height:91.4%"></div></div>
+        <div class="bar-single b"><div class="bar-val">15</div><div class="bar alt" style="height:12.9%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">114</div><div class="bar" style="height:98.3%"></div></div>
+        <div class="bar-single b"><div class="bar-val">18</div><div class="bar alt" style="height:15.5%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">116</div><div class="bar" style="height:100%"></div></div>
+        <div class="bar-single b"><div class="bar-val">22</div><div class="bar alt" style="height:19.0%"></div></div>
+      </div></div>
+    </div>
+    <div class="chart" style="height:0;border:none;padding:0;margin-top:8px;">
+      <div class="bar-col"><div class="bar-label">1기</div></div>
+      <div class="bar-col"><div class="bar-label">2기</div></div>
+      <div class="bar-col"><div class="bar-label">3기</div></div>
+      <div class="bar-col"><div class="bar-label">4기</div></div>
+      <div class="bar-col"><div class="bar-label">5기</div></div>
+      <div class="bar-col"><div class="bar-label">6기</div></div>
+      <div class="bar-col"><div class="bar-label">7기</div></div>
+    </div>
+    <table>
+      <thead><tr><th>기수</th><th>1기</th><th>2기</th><th>3기</th><th>4기</th><th>5기</th><th>6기</th><th>7기</th></tr></thead>
+      <tbody>
+        <tr><td>전체 대원</td><td>30</td><td>50</td><td>91</td><td>109</td><td>106</td><td>114</td><td class="hl">116</td></tr>
+        <tr><td>운영진</td><td>4</td><td>10</td><td>18</td><td>15</td><td>15</td><td>18</td><td>22</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. 기존 대원 수 + 전체 대원 수 -->
+  <section>
+    <h2>기수별 기존 대원 수 &amp; 전체 대원 수</h2>
+    <p class="desc">해당 기수 전체 대원 중 이전 기수부터 활동해온 인원 비율 · 4기부터 집계</p>
+    <div class="legend">
+      <span class="item"><span class="swatch a"></span>전체 대원</span>
+      <span class="item"><span class="swatch b"></span>기존 대원</span>
+    </div>
+    <div class="chart">
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">109</div><div class="bar" style="height:94.0%"></div></div>
+        <div class="bar-single b"><div class="bar-val">39</div><div class="bar alt" style="height:33.6%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">106</div><div class="bar" style="height:91.4%"></div></div>
+        <div class="bar-single b"><div class="bar-val">49</div><div class="bar alt" style="height:42.2%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">114</div><div class="bar" style="height:98.3%"></div></div>
+        <div class="bar-single b"><div class="bar-val">62</div><div class="bar alt" style="height:53.4%"></div></div>
+      </div></div>
+      <div class="bar-col"><div class="bar-pair">
+        <div class="bar-single a"><div class="bar-val">116</div><div class="bar" style="height:100%"></div></div>
+        <div class="bar-single b"><div class="bar-val">65</div><div class="bar alt" style="height:56.0%"></div></div>
+      </div></div>
+    </div>
+    <div class="chart" style="height:0;border:none;padding:0;margin-top:8px;">
+      <div class="bar-col"><div class="bar-label">4기</div></div>
+      <div class="bar-col"><div class="bar-label">5기</div></div>
+      <div class="bar-col"><div class="bar-label">6기</div></div>
+      <div class="bar-col"><div class="bar-label">7기</div></div>
+    </div>
+    <table>
+      <thead><tr><th>기수</th><th>전체 대원</th><th>기존 대원</th><th>기존 대원 비율</th></tr></thead>
+      <tbody>
+        <tr><td>4기</td><td>109</td><td>39</td><td>35.8%</td></tr>
+        <tr><td>5기</td><td>106</td><td>49</td><td>46.2%</td></tr>
+        <tr><td>6기</td><td>114</td><td>62</td><td>54.4%</td></tr>
+        <tr><td>7기</td><td>116</td><td class="hl">65</td><td class="pos">56.0%</td></tr>
+      </tbody>
+    </table>
+    <p class="note">기존 대원 비율은 4기 35.8% → 7기 56.0%로 꾸준히 상승 — 기수를 거듭할수록 신규 유입 대비 재활동(잔류) 비중이 커지는 추세입니다.</p>
+  </section>
+
+  <!-- 3. 연속 유지 인원 -->
+  <section>
+    <h2>과거부터 현재(7기)까지 연속 활동 대원 수</h2>
+    <p class="desc">해당 기수부터 7기까지 매 기수 빠짐없이 활동한 인원 (누적 유지 그룹)</p>
+    <div class="chart">
+      <div class="bar-col"><div class="bar-val">11</div><div class="bar alt" style="height:27.5%"></div></div>
+      <div class="bar-col"><div class="bar-val">21</div><div class="bar alt" style="height:52.5%"></div></div>
+      <div class="bar-col"><div class="bar-val">30</div><div class="bar alt" style="height:75.0%"></div></div>
+      <div class="bar-col"><div class="bar-val">40</div><div class="bar alt" style="height:100%"></div></div>
+    </div>
+    <div class="chart" style="height:0;border:none;padding:0;margin-top:8px;">
+      <div class="bar-col"><div class="bar-label">2기~</div></div>
+      <div class="bar-col"><div class="bar-label">3기~</div></div>
+      <div class="bar-col"><div class="bar-label">4기~</div></div>
+      <div class="bar-col"><div class="bar-label">5기~</div></div>
+    </div>
+    <table>
+      <thead><tr><th>시작 기수</th><th>2기부터</th><th>3기부터</th><th>4기부터</th><th>5기부터</th></tr></thead>
+      <tbody><tr><td>연속 유지 인원</td><td>11명</td><td>21명</td><td>30명</td><td class="hl">40명</td></tr></tbody>
+    </table>
+    <p class="note">각 그룹은 다음 그룹에 포함되는 중첩 구조입니다 (2기 그룹 ⊂ 3기 그룹 ⊂ 4기 그룹 ⊂ 5기 그룹).</p>
+  </section>
+
+  <p class="note" style="text-align:center;">개인정보(이름·연락처)는 포함되어 있지 않으며, 집계 수치만 담고 있습니다.</p>
+
+</div>
+</body>
+</html>

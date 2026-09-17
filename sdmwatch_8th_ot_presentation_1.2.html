@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>서대문떡잎마을 방범대 8기 OT</title>
+  <style>
+    :root{
+      --forest:#174b36; --forest2:#0e3527; --leaf:#79b94c; --lime:#cce96b;
+      --cream:#f7f3e8; --paper:#fffdf7; --ink:#183229; --muted:#65746d;
+      --yellow:#ffd96a; --coral:#ff836f; --sky:#8bcbd7; --line:rgba(24,50,41,.14);
+      --shadow:0 24px 70px rgba(8,34,25,.20);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;overflow:hidden;background:#102d23;color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif}
+    button{font:inherit}
+    .deck{height:100%;position:relative;display:grid;place-items:center;background:
+      radial-gradient(circle at 15% 10%,rgba(121,185,76,.28),transparent 34%),
+      linear-gradient(145deg,#173d30,#0d241c 72%)}
+    .slide{
+      display:none;position:absolute;width:min(94vw,160vh);aspect-ratio:16/9;max-height:90vh;
+      overflow:hidden;background:var(--paper);border-radius:20px;box-shadow:var(--shadow);
+      padding:clamp(30px,4.4vw,74px);isolation:isolate
+    }
+    .slide.active{display:block;animation:enter .42s cubic-bezier(.2,.75,.2,1)}
+    @keyframes enter{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:none}}
+    .slide::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(24,50,41,.07) .7px,transparent .7px);background-size:8px 8px;opacity:.28;z-index:-2}
+    .slide::after{content:"";position:absolute;width:340px;height:340px;border:2px solid rgba(121,185,76,.14);border-radius:48% 52% 45% 55%;right:-210px;bottom:-210px;z-index:-1}
+    .kicker{font-size:clamp(12px,1.05vw,18px);font-weight:900;letter-spacing:.16em;color:var(--leaf);text-transform:uppercase;margin-bottom:12px}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(42px,5.4vw,92px);line-height:1.02;letter-spacing:-.055em;margin-bottom:24px}
+    h2{font-size:clamp(30px,3.4vw,58px);line-height:1.08;letter-spacing:-.045em;margin-bottom:28px}
+    h3{font-size:clamp(18px,1.55vw,27px);letter-spacing:-.03em;margin-bottom:11px}
+    p,li{font-size:clamp(14px,1.18vw,21px);line-height:1.6}
+    .lead{font-size:clamp(18px,1.7vw,30px);line-height:1.52;color:#40564e;letter-spacing:-.025em}
+    .small{font-size:clamp(11px,.88vw,15px);color:var(--muted)}
+    .marker{position:relative;white-space:nowrap;z-index:0}
+    .marker::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height:.36em;background:var(--lime);opacity:.55;transform:rotate(-1deg);z-index:-1;border-radius:50%}
+    .green{color:var(--leaf)} .coral{color:var(--coral)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,48px);align-items:center;height:calc(100% - 95px)}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 24px;box-shadow:0 10px 26px rgba(28,64,48,.07)}
+    .card.tint{background:#edf6e8;border-color:#d8e9ca}.card.sun{background:#fff7d9;border-color:#f1e2a4}.card.blue{background:#eaf6f7;border-color:#cce6e9}.card.pink{background:#fff0ec;border-color:#f6d3ca}
+    .icon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:var(--forest);color:#fff;font-size:28px;margin-bottom:17px;box-shadow:0 8px 18px rgba(23,75,54,.18)}
+    ul.clean{list-style:none;padding:0;margin:0}.clean li{position:relative;padding-left:1.3em;margin:.38em 0}.clean li::before{content:"";position:absolute;left:0;top:.67em;width:.5em;height:.5em;background:var(--leaf);border-radius:50% 10% 50% 50%;transform:rotate(-25deg)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#eef5e9;color:var(--forest);font-weight:800;font-size:clamp(11px,.85vw,15px);margin:4px 4px 4px 0}
+    .number{font-size:clamp(54px,7vw,118px);line-height:.85;color:rgba(121,185,76,.20);font-weight:1000;letter-spacing:-.08em}
+    .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:30px;position:relative}.timeline::before{content:"";position:absolute;left:8%;right:8%;top:27px;height:3px;background:#d9e7d2;z-index:-1}.step{text-align:center}.dot{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin:0 auto 13px;background:var(--forest);color:#fff;font-size:23px;border:6px solid var(--paper)}.step b{display:block;font-size:clamp(12px,1vw,18px)}.step span{font-size:clamp(10px,.78vw,14px);color:var(--muted)}
+    .forest-slide{color:#fff;background:
+      linear-gradient(100deg,rgba(8,45,31,.92),rgba(8,45,31,.56)),
+      radial-gradient(circle at 80% 20%,#5a8357,#1e523d 46%,#0e3428)}
+    .forest-slide::before{background:
+      linear-gradient(72deg,transparent 42%,rgba(255,255,255,.04) 43%,transparent 45%),
+      repeating-linear-gradient(102deg,transparent 0 72px,rgba(255,255,255,.035) 73px 76px,transparent 77px 115px);opacity:1}
+    .forest-slide .kicker,.forest-slide .small{color:#d5ee9b}.forest-slide .lead{color:#edf4e9}
+    .cover-brand{display:flex;align-items:center;gap:18px;margin-bottom:9vh}.seed-logo{width:74px;height:74px;border:2px solid rgba(255,255,255,.8);border-radius:50%;display:grid;place-items:center;font-size:38px;transform:rotate(-4deg)}
+    .doodle{position:absolute;color:rgba(255,255,255,.84);font-size:clamp(80px,10vw,170px);right:7%;bottom:8%;transform:rotate(9deg)}
+    .route{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 22px;margin-top:20px}.route-item{display:grid;grid-template-columns:48px 1fr;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px dashed #bfd4b4}.route-item b{font-size:clamp(15px,1.25vw,22px)}.route-num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:#fff;font-weight:900}
+    .quote{font-size:clamp(27px,3vw,52px);font-weight:950;line-height:1.24;letter-spacing:-.045em}.quote-mark{font-family:Georgia,serif;font-size:90px;line-height:.5;color:var(--leaf);opacity:.45}
+    .phone{width:min(26vw,290px);aspect-ratio:9/18;border:9px solid #183229;border-radius:38px;background:#fff;margin:auto;padding:26px 16px 18px;box-shadow:0 24px 45px rgba(21,52,41,.24);position:relative}.phone::before{content:"";position:absolute;top:9px;left:35%;right:35%;height:7px;background:#183229;border-radius:9px}.app-head{background:var(--forest);color:#fff;border-radius:18px;padding:22px 15px;margin-bottom:13px}.check-row{display:flex;align-items:center;gap:10px;border:1px solid #dde7d8;border-radius:14px;padding:12px;margin-top:8px;font-size:12px}.check{width:28px;height:28px;border-radius:50%;background:var(--leaf);display:grid;place-items:center;color:#fff;font-weight:900}
+    .stats-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:44px;align-items:end;height:calc(100% - 110px)}
+    .stat-hero .big-num{font-size:clamp(78px,10vw,162px);font-weight:1000;line-height:.82;letter-spacing:-.09em;color:var(--forest)}
+    .stat-hero .unit{font-size:.34em;letter-spacing:-.03em;margin-left:7px}.stat-hero p{margin:22px 0 0}
+    .growth-chart{height:320px;display:flex;align-items:end;gap:13px;border-bottom:2px solid #b9cbb1;padding:18px 5px 0}
+    .growth-col{flex:1;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}.growth-value{font-weight:900;font-size:clamp(12px,1vw,17px);color:var(--forest)}.growth-bar{width:72%;margin:0 auto;background:linear-gradient(180deg,var(--leaf),var(--forest));border-radius:10px 10px 0 0;min-height:15px}.growth-label{font-size:clamp(10px,.8vw,14px);font-weight:800;color:var(--muted);margin-bottom:-27px;transform:translateY(31px)}
+    .stat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}.stat-tile{padding:24px 22px;border-top:5px solid var(--leaf);background:#fff;border-radius:10px 10px 22px 22px;box-shadow:0 12px 28px rgba(28,64,48,.08)}.stat-tile strong{display:block;font-size:clamp(31px,3vw,52px);line-height:1;color:var(--forest);letter-spacing:-.055em}.stat-tile span{display:block;margin-top:11px;font-size:clamp(12px,.95vw,17px);font-weight:800}.stat-tile small{display:block;margin-top:5px;color:var(--muted);font-size:clamp(10px,.74vw,13px)}
+    .app-band{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.app-band span{display:inline-block;border-bottom:3px solid var(--lime);padding:6px 2px;font-weight:850;font-size:clamp(12px,.94vw,17px)}
+    .mini-phone{width:min(26vw,310px);height:490px;border:9px solid #17352a;border-radius:38px;background:#fff;margin:auto;overflow:hidden;box-shadow:0 24px 55px rgba(21,52,41,.24);position:relative}.mini-phone::before{content:"";position:absolute;top:10px;left:38%;right:38%;height:6px;background:#17352a;border-radius:9px;z-index:2}.mini-head{background:linear-gradient(135deg,#1ca374,#0b7b58);color:#fff;padding:36px 22px 23px}.mini-head b{display:block;font-size:18px}.mini-head small{opacity:.78}.mini-body{padding:21px}.field{margin:0 0 13px}.field label{display:block;font-size:11px;color:#66756e;font-weight:800;margin-bottom:6px}.field div{border:1px solid #dfe7e2;border-radius:12px;padding:12px 13px;color:#8a9690;font-size:12px}.app-button{display:block;width:100%;border:0;border-radius:12px;background:#1fa477;color:#fff;text-align:center;padding:13px;font-weight:900;margin-top:13px}.mini-tabs{position:absolute;left:0;right:0;bottom:0;border-top:1px solid #e4eae6;background:#fff;display:flex;justify-content:space-around;padding:9px 6px;font-size:18px}
+    .feature-list{display:grid;gap:17px}.feature-row{display:grid;grid-template-columns:46px 1fr;gap:15px;align-items:start;padding-bottom:14px;border-bottom:1px dashed #c6d6bf}.feature-row:last-child{border:0}.feature-row .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:#fff;font-weight:950}.feature-row b{display:block;font-size:clamp(15px,1.15vw,20px);margin-bottom:4px}.feature-row p{font-size:clamp(12px,.9vw,16px);line-height:1.48;margin:0;color:var(--muted)}
+    .live-slide{padding:24px 28px 26px}.live-slide::before{display:none}.demo-top{height:62px;display:flex;align-items:center;justify-content:space-between;gap:20px}.demo-title{display:flex;align-items:center;gap:13px}.demo-title h2{font-size:clamp(23px,2.2vw,38px);margin:0}.demo-actions{display:flex;gap:9px;align-items:center}.demo-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none;padding:10px 15px;border-radius:999px;background:var(--forest);color:#fff;font-weight:850;font-size:13px}.demo-note{font-size:12px;color:var(--muted)}.frame-shell{height:calc(100% - 70px);border:1px solid #bcd2c4;border-radius:20px;overflow:hidden;background:#f3f8f5;box-shadow:inset 0 0 0 5px #fff}.frame-shell iframe{width:100%;height:100%;border:0;background:#fff}.demo-footer{position:absolute;left:45px;bottom:34px;background:rgba(255,255,255,.94);border:1px solid #d5e1d8;padding:8px 13px;border-radius:999px;font-size:11px;color:#52665c;box-shadow:0 5px 15px rgba(0,0,0,.08);pointer-events:none}
+    .flow-visual{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr;align-items:center;gap:8px}.flow-card{text-align:center;padding:23px 14px;border-radius:22px;background:#fff;border:1px solid var(--line);min-height:180px}.flow-card .emoji{font-size:39px}.flow-card b{display:block;margin:10px 0 6px;font-size:clamp(14px,1.05vw,19px)}.flow-card p{font-size:clamp(11px,.8vw,14px);color:var(--muted);line-height:1.4}.flow-arrow{text-align:center;font-size:25px;color:var(--leaf);font-weight:900}
+    .bin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.bin{border-radius:20px;padding:20px 14px;text-align:center;min-height:190px;border:1px solid var(--line);background:#fff}.bin .emoji{font-size:45px}.bin b{display:block;margin:8px 0}.bin p{font-size:clamp(11px,.82vw,15px);line-height:1.45;color:var(--muted)}
+    .quiz{display:grid;grid-template-columns:1fr 1fr;gap:22px}.qbox{border:2px dashed #c5d9b9;border-radius:25px;padding:26px;text-align:center}.qbox .big{font-size:54px}.answer{display:inline-block;padding:7px 18px;border-radius:999px;background:#edf6e8;font-weight:900;color:var(--forest)}
+    .people{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.person{text-align:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:19px 14px}.avatar{width:76px;height:76px;border-radius:50%;margin:0 auto 13px;background:linear-gradient(145deg,#cfe7bc,#70a954);display:grid;place-items:center;font-size:39px}.person b{font-size:clamp(14px,1.1vw,19px)}.person span{display:block;color:var(--muted);font-size:clamp(10px,.75vw,13px);margin-top:5px}
+    .social-circles{height:320px;position:relative}.bubble{position:absolute;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:900;box-shadow:0 12px 30px rgba(33,76,58,.15)}.b1{width:175px;height:175px;background:#e2f0d7;left:8%;top:13%}.b2{width:142px;height:142px;background:#fff0ba;left:42%;top:3%}.b3{width:158px;height:158px;background:#dceff2;right:5%;top:28%}.b4{width:115px;height:115px;background:#ffe1d9;left:35%;bottom:0}
+    .mission{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}.mission-board{background:var(--forest);color:#fff;border-radius:26px;padding:28px 32px}.mission-board ol{padding-left:1.25em}.mission-board li{margin:10px 0}.safety{display:grid;gap:12px}.safety .card{padding:15px 18px;display:flex;align-items:center;gap:14px}.safety .card span{font-size:27px}.safety .card b{font-size:clamp(12px,.95vw,17px)}
+    .finish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}.finish{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.20);border-radius:24px;padding:25px}.finish span{font-size:37px}.finish h3{margin:12px 0 6px}.finish p{font-size:clamp(11px,.85vw,15px);color:#d7e8de;margin:0}
+    .editable[contenteditable="true"]{outline:2px dashed var(--coral);outline-offset:4px;border-radius:4px;background:rgba(255,131,111,.08)}
+    .controls{position:fixed;z-index:20;left:50%;bottom:15px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(7,30,22,.86);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#fff}
+    .controls button{border:0;color:#fff;background:transparent;width:36px;height:34px;border-radius:50%;cursor:pointer}.controls button:hover{background:rgba(255,255,255,.14)}
+    .counter{min-width:68px;text-align:center;font-size:12px;font-weight:800}.progress{position:fixed;z-index:21;bottom:0;left:0;height:4px;background:var(--lime);transition:width .3s}
+    .help{position:fixed;right:18px;top:18px;z-index:30;background:#fff;color:var(--ink);padding:12px 16px;border-radius:14px;box-shadow:var(--shadow);font-size:12px;display:none;line-height:1.7}.help.show{display:block}
+    .notes{display:none;position:absolute;left:5%;right:5%;bottom:4%;background:rgba(255,255,255,.96);border-left:5px solid var(--yellow);padding:13px 18px;border-radius:10px;color:var(--ink);font-size:clamp(11px,.82vw,15px);box-shadow:0 8px 25px rgba(0,0,0,.15)}.show-notes .active .notes{display:block}
+    .page-tag{position:absolute;right:5%;top:5%;font-size:12px;color:#819087;font-weight:800}.forest-slide .page-tag{color:#cfe1d4}
+    @media(max-width:800px){.slide{width:98vw;border-radius:10px;padding:24px}.card{padding:14px}.grid2{gap:18px}.controls{bottom:7px}.phone{transform:scale(.75)}.bin{min-height:140px;padding:10px}.people{gap:8px}.avatar{width:55px;height:55px;font-size:28px}.social-circles{transform:scale(.8)} }
+    @media print{html,body{overflow:visible;background:#fff}.deck{display:block;background:#fff}.slide{display:block!important;position:relative;width:297mm;height:167.06mm;max-height:none;page-break-after:always;border-radius:0;box-shadow:none}.controls,.progress,.help,.notes{display:none!important}}
+  </style>
+</head>
+<body>
+<main class="deck" id="deck">
+  <section class="slide forest-slide active">
+    <div class="cover-brand"><div class="seed-logo">🌱</div><div><b>서대문떡잎마을 방범대</b><div class="small">함께 걷고, 함께 줍고, 함께 웃는 동네</div></div></div>
+    <div class="kicker">WELCOME TO SDM WATCH</div>
+    <h1>반가워요,<br><span class="marker">8기 떡잎대원</span> 여러분!</h1>
+    <p class="lead editable" contenteditable="false">8기 오리엔테이션 · 날짜 / 장소를 입력하세요</p>
+    <div class="doodle">♧</div><div class="page-tag">8TH ORIENTATION</div>
+    <div class="notes">첫 인사 후 “오늘 처음 만난 옆 사람과 눈인사”를 요청하면 분위기를 빠르게 풀 수 있어요.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">TODAY'S ROUTE</div><h2>오늘, 이 순서로 함께해요</h2>
+    <div class="route">
+      <div class="route-item"><div class="route-num">01</div><div><b>분리배출 교육</b><div class="small">까치샘과 제대로 배우기</div></div></div>
+      <div class="route-item"><div class="route-num">02</div><div><b>서떡방 소개</b><div class="small">대원 현황 + 출석 앱</div></div></div>
+      <div class="route-item"><div class="route-num">03</div><div><b>운영진 소개</b><div class="small">8기를 함께 만드는 사람들</div></div></div>
+      <div class="route-item"><div class="route-num">04</div><div><b>소셜링 소개</b><div class="small">지훈님과 취향으로 가까워지기</div></div></div>
+      <div class="route-item"><div class="route-num">05</div><div><b>플로깅 활동 소개</b><div class="small">오늘의 코스와 안전수칙</div></div></div>
+      <div class="route-item"><div class="route-num">06</div><div><b>활동 마무리</b><div class="small">플로깅 후 분류 · 인증 · 단체사진</div></div></div>
+    </div><div class="page-tag">01</div>
+    <div class="notes">전체 진행 시간을 간단히 안내하고, 질문은 중간 또는 마지막에 받는다고 알려주세요.</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">WHO WE ARE</div>
+    <div class="grid2">
+      <div><div class="quote-mark">“</div><div class="quote">우리 동네를<br>조금 더 <span class="marker">깨끗하고 다정하게.</span></div></div>
+      <div><p class="lead">서대문떡잎마을 방범대는<br><b>20–30대 청년들이 함께하는 지역 봉사 커뮤니티</b>입니다.</p>
+        <div><span class="pill">🌿 플로깅</span><span class="pill">🎨 벽화봉사</span><span class="pill">🌊 환경정화</span><span class="pill">🤝 지역연결</span></div>
+        <p class="small" style="margin-top:22px">거창한 영웅보다, 꾸준히 움직이는 이웃이 되는 것.</p>
+      </div>
+    </div><div class="page-tag">02</div>
+    <div class="notes">‘방범대’라는 이름은 동네를 살핀다는 의미이며, 실제 활동의 중심은 환경·지역 봉사와 커뮤니티라는 점을 소개하세요.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">OUR GROWTH</div><h2>30명에서 116명까지, 함께 키운 서떡방</h2>
+    <div class="stats-layout">
+      <div class="stat-hero"><div class="big-num">116<span class="unit">명</span></div><p class="lead">7기 전체 대원<br><b>1기보다 약 3.9배</b> 커졌어요.</p><p class="small">STB_members.html · 1기부터 7기 집계</p></div>
+      <div class="growth-chart" aria-label="기수별 전체 대원 수">
+        <div class="growth-col"><div class="growth-value">30</div><div class="growth-bar" style="height:25.9%"></div><div class="growth-label">1기</div></div>
+        <div class="growth-col"><div class="growth-value">50</div><div class="growth-bar" style="height:43.1%"></div><div class="growth-label">2기</div></div>
+        <div class="growth-col"><div class="growth-value">91</div><div class="growth-bar" style="height:78.4%"></div><div class="growth-label">3기</div></div>
+        <div class="growth-col"><div class="growth-value">109</div><div class="growth-bar" style="height:94%"></div><div class="growth-label">4기</div></div>
+        <div class="growth-col"><div class="growth-value">106</div><div class="growth-bar" style="height:91.4%"></div><div class="growth-label">5기</div></div>
+        <div class="growth-col"><div class="growth-value">114</div><div class="growth-bar" style="height:98.3%"></div><div class="growth-label">6기</div></div>
+        <div class="growth-col"><div class="growth-value">116</div><div class="growth-bar" style="height:100%"></div><div class="growth-label">7기</div></div>
+      </div>
+    </div><div class="page-tag">03</div>
+    <div class="notes">숫자를 빠르게 읽기보다 “한 명 한 명의 참여가 쌓여 지금의 서떡방이 됐다”는 이야기로 연결하세요.</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">PEOPLE COME BACK</div><h2>다시 함께하는 대원이 늘고 있어요</h2>
+    <p class="lead">7기 대원 절반 이상이 이전 기수부터 활동을 이어왔습니다.</p>
+    <div class="stat-tiles">
+      <div class="stat-tile"><strong>56.0%</strong><span>7기 기존 대원 비율</span><small>65명 / 116명</small></div>
+      <div class="stat-tile"><strong>11명</strong><span>2기부터 연속 활동</span><small>가장 오래 함께한 대원 그룹</small></div>
+      <div class="stat-tile"><strong>22명</strong><span>7기 운영진</span><small>전체 대원의 19.0%</small></div>
+    </div>
+    <p class="lead" style="text-align:center;margin-top:34px"><b>8기 여러분도 오래 만날 수 있기를 바라요. 🌱</b></p><div class="page-tag">04</div>
+    <div class="notes">기존 대원에게는 반가움을, 신규 대원에게는 부담 없는 환영의 메시지를 전하는 슬라이드입니다.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">OUR PROMISE</div><h2>서떡방이 중요하게 생각하는 것</h2>
+    <div class="grid3">
+      <div class="card tint"><div class="icon">🌱</div><h3>작게라도 직접</h3><p>생각에 그치지 않고 우리 동네에서 바로 움직여요.</p></div>
+      <div class="card sun"><div class="icon">🫶</div><h3>즐겁고 다정하게</h3><p>처음 온 대원도 편하게 어울릴 수 있는 분위기를 만들어요.</p></div>
+      <div class="card blue"><div class="icon">🔁</div><h3>꾸준하고 안전하게</h3><p>한 번의 이벤트보다 오래 이어지는 변화를 지향해요.</p></div>
+    </div>
+    <p class="lead" style="text-align:center;margin-top:32px"><span class="marker">봉사 + 사람 + 동네</span>, 세 가지를 함께 잇습니다.</p><div class="page-tag">03</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">SDM MEMBER PAGE</div>
+    <div class="grid2">
+      <div><h2>설치 없이,<br><span class="marker">휴대폰 브라우저</span>로 바로</h2><p class="lead">활동에 필요한 기능을 한곳에서 이용하는 서떡방 대원페이지입니다.</p>
+        <div class="app-band"><span>활동 일정</span><span>출석체크</span><span>사전신청</span><span>마이페이지</span><span>커뮤니티</span><span>미니게임</span></div>
+        <p class="small" style="margin-top:25px">우측 하단 📖 버튼에서 7단계 이용가이드를 언제든 다시 볼 수 있어요.</p>
+      </div>
+      <div class="mini-phone"><div class="mini-head"><b>서대문 떡잎마을 방범대</b><small>로그인 후 이용해주세요</small></div><div class="mini-body"><div class="field"><label>이름</label><div>홍길동</div></div><div class="field"><label>전화번호 뒷 4자리</label><div>1234</div></div><div class="app-button">로그인</div></div><div style="position:absolute;right:18px;bottom:22px;width:48px;height:48px;border-radius:50%;background:#1fa477;display:grid;place-items:center;font-size:23px">📖</div></div>
+    </div><div class="page-tag">06</div>
+    <div class="notes">실제 사이트의 로그인 화면과 이용가이드 버튼을 기준으로 구성했습니다. 다음 슬라이드에서 접속과 로그인 순서를 설명합니다.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">ACCESS & LOGIN</div><h2>첫 로그인과 다음 로그인</h2>
+    <div class="grid2">
+      <div class="feature-list">
+        <div class="feature-row"><div class="n">1</div><div><b>이름과 전화번호 뒷 4자리 입력</b><p>회원가입 없이 등록된 대원 명단을 확인합니다.</p></div></div>
+        <div class="feature-row"><div class="n">2</div><div><b>첫 접속 때 고유코드 3글자 설정</b><p>본인이 기억하기 쉬운 3글자로 설정합니다.</p></div></div>
+        <div class="feature-row"><div class="n">3</div><div><b>다음부터 고유코드로 로그인</b><p>코드를 잊었다면 전체 전화번호로 다시 설정할 수 있습니다.</p></div></div>
+      </div>
+      <div><div class="card tint"><h3>접속 주소</h3><p style="word-break:break-all"><a href="https://sdm-attendance.vercel.app/" target="_blank" rel="noopener" style="color:var(--forest);font-weight:900">https://sdm-attendance.vercel.app/</a></p><p class="small">8기 카톡방의 링크를 눌러도 접속할 수 있어요.</p></div><div class="card sun" style="margin-top:16px"><h3>홈 화면 추가 권장</h3><p>브라우저 메뉴에서 ‘홈 화면에 추가’를 선택하면 다음부터 앱처럼 바로 열 수 있습니다.</p><p class="small">아이폰 알림은 홈 화면에 설치한 뒤 허용해야 받을 수 있어요.</p></div></div>
+    </div><div class="page-tag">07</div>
+  </section>
+
+  <section class="slide live-slide">
+    <div class="demo-top"><div class="demo-title"><span style="font-size:30px">📱</span><h2>출석 앱 라이브 데모</h2></div><div class="demo-actions"><span class="demo-note">인터넷 연결 필요 · 화면 안을 직접 눌러보세요</span><a class="demo-link" href="https://sdm-attendance.vercel.app/" target="_blank" rel="noopener">새 창으로 열기 ↗</a></div></div>
+    <div class="frame-shell"><iframe src="https://sdm-attendance.vercel.app/" title="서대문 떡잎마을 방범대 출석 앱" loading="eager" referrerpolicy="strict-origin-when-cross-origin">이 브라우저에서는 앱 화면을 불러올 수 없습니다.</iframe></div>
+    <div class="demo-footer">📖 이용가이드 → 이름·전화번호 → 로그인 순서로 시연 · 다음 슬라이드로 갈 때 바깥 여백을 클릭하세요</div><div class="page-tag">08</div>
+    <div class="notes">라이브 화면입니다. 우측 하단 📖 버튼을 눌러 7단계 가이드를 보여준 뒤, 필요하면 새 창에서 실제 계정으로 로그인하세요. 개인정보가 관객에게 보이지 않도록 주의하세요.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">ATTENDANCE & APPLY</div><h2>출석체크와 사전신청</h2>
+    <div class="flow-visual">
+      <div class="flow-card tint"><div class="emoji">📅</div><b>활동 선택</b><p>하단 ‘활동’에서 오늘 참여한 활동을 선택합니다.</p></div><div class="flow-arrow">›</div>
+      <div class="flow-card sun"><div class="emoji">☑️</div><b>참여 항목 확인</b><p>세부 항목이 있으면 체크합니다. 추가 비용도 이때 확인합니다.</p></div><div class="flow-arrow">›</div>
+      <div class="flow-card blue"><div class="emoji">✅</div><b>출석 완료</b><p>현장에서 버튼을 누르면 바로 처리됩니다.</p></div>
+    </div>
+    <div class="cards" style="margin-top:25px"><div class="card tint"><h3>사전신청</h3><p>유료 활동은 계좌와 금액이 자동으로 표시됩니다. 항목별 추가 금액도 신청 화면에서 확인할 수 있어요.</p></div><div class="card pink"><h3>꼭 기억하기</h3><p>출석은 활동 당일 현장에서 진행합니다. 이미 처리했다면 중복 출석 안내가 표시돼요.</p></div></div><div class="page-tag">09</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">MY PAGE</div><h2>내 활동 기록을 한눈에 확인해요</h2>
+    <div class="grid2">
+      <div class="mini-phone"><div class="mini-head"><b>👤 마이페이지</b><small>홍길동님 🌱</small></div><div class="mini-body"><div class="check-row"><div class="check">8</div><div><b>8기</b><br><span style="color:#78877f">4회 중 3회 출석</span></div></div><div class="check-row"><div class="check">7</div><div><b>7기</b><br><span style="color:#78877f">6회 중 6회 출석</span></div></div><div class="check-row"><div class="check" style="background:#dce7d7;color:#698070">✎</div><div><b>내 정보 수정</b><br><span style="color:#78877f">1365 ID 포함</span></div></div></div><div class="mini-tabs"><span>⌂</span><span>✓</span><span>●</span><span style="color:#1fa477">👤</span></div></div>
+      <div class="feature-list">
+        <div class="feature-row"><div class="n">✓</div><div><b>기수별 활동 이력</b><p>참여했던 모든 기수가 카드로 표시되고 사전신청과 출석 현황을 확인할 수 있어요.</p></div></div>
+        <div class="feature-row"><div class="n">↗</div><div><b>개근·봉사 현황</b><p>실시간으로 쌓이는 출석 기록을 보며 개근에 도전할 수 있어요.</p></div></div>
+        <div class="feature-row"><div class="n">✎</div><div><b>내 정보와 1365 ID 수정</b><p>1365 ID를 잘못 입력했거나 비워둔 대원은 마이페이지에서 꼭 수정해 주세요.</p></div></div>
+      </div>
+    </div><div class="page-tag">10</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">MORE FEATURES</div><h2>소셜링부터 미니게임까지</h2>
+    <div class="grid3" style="grid-template-columns:repeat(4,1fr)">
+      <div class="card tint"><div class="icon">💬</div><h3>소셜링 게시판</h3><p>원하는 모임을 제안하고 함께 진행할 운영진 호스트를 구해요.</p></div>
+      <div class="card sun"><div class="icon">📮</div><h3>건의함</h3><p>운영 의견을 남길 수 있어요. 익명 작성도 가능합니다.</p></div>
+      <div class="card blue"><div class="icon">🎮</div><h3>미니게임</h3><p>플로깅팡, 카드대전, 동물퍼즐, 연탄나르기를 즐겨요.</p></div>
+      <div class="card pink"><div class="icon">📖</div><h3>이용가이드</h3><p>우측 하단 책 버튼을 누르면 7단계 안내를 다시 볼 수 있어요.</p></div>
+    </div>
+    <div class="card tint" style="margin-top:25px;text-align:center"><b>소셜링 개최 기준</b><p style="margin:6px 0 0">최소 3명 이상 · 대원이 열 때는 운영진 1명 필요 · 글 수정과 삭제는 등록 비밀번호로 진행</p></div><div class="page-tag">11</div>
+    <div class="notes">실제 사이트 이용가이드와 첨부한 기능설명 자료를 함께 반영했습니다.</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">RECYCLE RIGHT</div>
+    <div class="grid2"><div><h2>버리는 순간까지<br><span class="marker">봉사입니다</span></h2><p class="lead">플로깅은 줍는 것으로 끝나지 않아요.<br>올바르게 나누어 버려야 환경을 지킬 수 있어요.</p></div>
+    <div class="card" style="color:var(--ink);transform:rotate(1.5deg)"><div class="icon">🧑‍🏫</div><h3>분리배출 교육 · 까치샘</h3><p class="editable" contenteditable="false">“헷갈리는 쓰레기, 오늘 확실히 구분해봐요!”</p><span class="pill">비우기</span><span class="pill">헹구기</span><span class="pill">분리하기</span><span class="pill">섞지 않기</span></div></div><div class="page-tag">05</div>
+    <div class="notes">여기서 까치샘께 마이크를 넘깁니다. 교육 예상 시간을 미리 안내하면 진행이 매끄러워요.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">4 BASIC RULES</div><h2>분리배출, 이것만 기억해요</h2>
+    <div class="bin-grid">
+      <div class="bin"><div class="emoji">🥤</div><b>비우고</b><p>내용물과 음식물은 깨끗이 비워요.</p></div>
+      <div class="bin"><div class="emoji">💧</div><b>헹구고</b><p>이물질이 남지 않도록 가볍게 씻어요.</p></div>
+      <div class="bin"><div class="emoji">🏷️</div><b>분리하고</b><p>라벨·뚜껑처럼 다른 재질은 떼어내요.</p></div>
+      <div class="bin"><div class="emoji">🗂️</div><b>섞지 않고</b><p>재질별 수거함에 정확히 넣어요.</p></div>
+    </div>
+    <div class="card pink" style="margin-top:22px;text-align:center"><b>오염이 심하거나 재질 확인이 어렵다면?</b> &nbsp; 무리하게 재활용하지 말고 종량제 봉투로!</div><div class="page-tag">06</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">MEET THE CREW</div><h2>8기를 함께 만드는 운영진</h2>
+    <div class="people">
+      <div class="person"><div class="avatar">🌳</div><b>대장 · 조우리</b><span>서떡방 8기 활동을 총괄합니다.</span></div>
+      <div class="person"><div class="avatar">🧾</div><b>살림팀</b><span class="editable" contenteditable="false">살림팀을 소개하는 한 문장을 입력하세요.</span></div>
+      <div class="person"><div class="avatar">📣</div><b>홍보팀</b><span class="editable" contenteditable="false">홍보팀을 소개하는 한 문장을 입력하세요.</span></div>
+      <div class="person"><div class="avatar">🫶</div><b>피플팀</b><span class="editable" contenteditable="false">피플팀을 소개하는 한 문장을 입력하세요.</span></div>
+    </div>
+    <p class="lead" style="text-align:center;margin-top:31px">궁금하거나 불편한 점은 언제든 <span class="marker">가까운 운영진</span>에게 알려주세요.</p><div class="page-tag">08</div>
+    <div class="notes">E 키로 편집 모드를 켠 뒤 각 팀 아래의 소개 문장을 직접 입력할 수 있습니다.</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">SOCIALING</div><div class="grid2">
+      <div><h2>봉사 밖에서도<br>우리는 <span class="marker">친구가 됩니다</span></h2><p class="lead">취향과 관심사로 모여, 부담 없이 가까워지는 서떡방 소모임</p><p><b>소개 · 지훈님</b></p></div>
+      <div class="social-circles"><div class="bubble b1">🍳<br>맛집·요리</div><div class="bubble b2">🏃<br>운동</div><div class="bubble b3">🎬<br>문화생활</div><div class="bubble b4">☕<br>수다</div></div>
+    </div><div class="page-tag">09</div>
+    <div class="notes">지훈님께 마이크를 넘기는 전환 슬라이드입니다.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">HOW TO SOCIAL</div><h2>소셜링은 이렇게 열고 참여해요</h2>
+    <div class="timeline">
+      <div class="step"><div class="dot">💡</div><b>아이디어</b><span>하고 싶은 것 찾기</span></div>
+      <div class="step"><div class="dot">✍️</div><b>모임 등록</b><span>일정·장소·인원</span></div>
+      <div class="step"><div class="dot">🙋</div><b>참여 신청</b><span>댓글/신청 방식</span></div>
+      <div class="step"><div class="dot">🎉</div><b>함께 즐기기</b><span>새 대원도 환영</span></div>
+      <div class="step"><div class="dot">📸</div><b>후기 나눔</b><span>다음 만남으로</span></div>
+    </div>
+    <div class="cards" style="margin-top:30px"><div class="card tint"><h3>호스트라면</h3><p>목적·비용·취소 기준을 미리 분명하게 알려주세요.</p></div><div class="card sun"><h3>참여자라면</h3><p>존중, 시간 약속, 안전—세 가지만 꼭 지켜주세요.</p></div></div><div class="page-tag">10</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">PLOGGING 101</div><h2>걷고, 줍고, 동네를 발견하는 시간</h2>
+    <div class="grid3">
+      <div class="card tint"><div class="number">01</div><h3>둘러보기</h3><p>골목과 공원을 천천히 걸으며 우리 동네를 살펴봐요.</p></div>
+      <div class="card sun"><div class="number">02</div><h3>안전하게 줍기</h3><p>집게와 장갑을 사용하고 위험한 쓰레기는 건드리지 않아요.</p></div>
+      <div class="card blue"><div class="number">03</div><h3>제대로 나누기</h3><p>활동 후 함께 분류하고 정해진 장소에 배출해요.</p></div>
+    </div><p class="lead" style="margin-top:28px;text-align:center">빠르게 많이보다 <span class="marker">안전하게 함께</span>가 먼저입니다.</p><div class="page-tag">11</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">TODAY'S MISSION</div><h2>오늘의 플로깅 안내</h2>
+    <div class="mission"><div class="mission-board"><h3 style="font-size:26px">🌿 우리 조의 미션</h3><ol><li class="editable" contenteditable="false">조별 코스와 활동 시간을 입력하세요</li><li>2인 이상 함께 이동하기</li><li>일반 / 재활용 쓰레기 나누어 담기</li><li>마지막 집결지로 시간 맞춰 복귀하기</li></ol><p class="small">집결 장소 · <span class="editable" contenteditable="false">장소를 입력하세요</span> &nbsp; / &nbsp; 복귀 시간 · <span class="editable" contenteditable="false">00:00</span></p></div>
+    <div class="safety"><div class="card pink"><span>🧤</span><b>장갑·집게 사용</b></div><div class="card sun"><span>🚦</span><b>차도·자전거 주의</b></div><div class="card blue"><span>🩹</span><b>날카로운 물건은 운영진 호출</b></div><div class="card tint"><span>👥</span><b>혼자 멀리 이동하지 않기</b></div></div></div><div class="page-tag">12</div>
+    <div class="notes">출발 전에 실제 코스, 복귀 시간, 화장실과 비상연락 방법을 구두로 한 번 더 안내하세요.</div>
+  </section>
+
+  <section class="slide">
+    <div class="kicker">LET'S MOVE</div><h2>이제, 같이 걸어볼까요?</h2>
+    <div class="timeline">
+      <div class="step"><div class="dot">👥</div><b>조 편성</b><span>인사하고 역할 정하기</span></div>
+      <div class="step"><div class="dot">🧤</div><b>물품 수령</b><span>장갑·집게·봉투</span></div>
+      <div class="step"><div class="dot">🚶</div><b>코스 이동</b><span>안전하게 함께</span></div>
+      <div class="step"><div class="dot">🗂️</div><b>분리배출</b><span>까치샘 교육대로</span></div>
+      <div class="step"><div class="dot">📸</div><b>활동 인증</b><span>기록과 단체사진</span></div>
+    </div>
+    <div class="card tint" style="margin:36px auto 0;max-width:820px;text-align:center"><h3>오늘의 한마디</h3><p class="lead" style="margin:0">“내가 주운 쓰레기 하나만큼, 우리 동네가 가벼워집니다.”</p></div><div class="page-tag">13</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div class="kicker">WRAP UP</div><h2>플로깅 후, 이렇게 마무리해요</h2>
+    <div class="finish-grid"><div class="finish"><span>🗑️</span><h3>분류·배출</h3><p>봉투를 한곳에 모아 재질별로 최종 정리해요.</p></div><div class="finish"><span>✅</span><h3>활동 완료</h3><p>앱 기록과 준비물 반납을 확인해요.</p></div><div class="finish"><span>📷</span><h3>단체사진</h3><p>8기의 첫 활동을 다 같이 남겨요.</p></div></div>
+    <p class="lead" style="text-align:center;margin-top:40px">첫 활동, 함께해 주셔서 고맙습니다.<br><b>우리 8기, 오래오래 즐겁게 만나요! 🌱</b></p><div class="page-tag">14</div>
+    <div class="notes">분실물 확인 → 다음 일정 안내 → 단체사진 순서로 마무리하면 좋습니다.</div>
+  </section>
+
+  <section class="slide forest-slide">
+    <div style="display:grid;place-items:center;height:100%;text-align:center"><div><div class="seed-logo" style="margin:0 auto 24px">🌱</div><div class="kicker">WELCOME, 8TH MEMBERS</div><h1 style="margin-bottom:22px">이제 진짜<br><span class="marker">서떡방 8기</span>입니다!</h1><p class="lead">질문 · 연락처 · 다음 활동 안내</p><div class="editable" contenteditable="false" style="margin-top:28px;color:#d8ecdf">카페 / SNS / 오픈채팅 주소를 입력하세요</div></div></div><div class="page-tag">END</div>
+  </section>
+</main>
+
+<div class="controls" aria-label="발표 컨트롤">
+  <button id="prev" title="이전 (←)">←</button><span class="counter" id="counter">1 / 22</span><button id="next" title="다음 (→)">→</button>
+  <button id="notesBtn" title="발표자 메모 (N)">N</button><button id="editBtn" title="텍스트 편집 (E)">✎</button><button id="fullBtn" title="전체화면 (F)">⛶</button><button id="helpBtn" title="도움말 (?)">?</button>
+</div>
+<div class="progress" id="progress"></div>
+<div class="help" id="help"><b>발표 조작</b><br>← → / Space : 슬라이드 이동<br>F : 전체화면<br>N : 발표자 메모<br>E : 주황 점선 문구 편집<br>Home / End : 처음 / 마지막<br>P : 인쇄·PDF 저장<br><br>라이브 데모 후 바깥 여백을 클릭하면<br>발표 키가 다시 작동합니다.</div>
+
+<script>
+  const deck=document.getElementById('deck');
+  const originalSlides=[...deck.querySelectorAll('.slide')];
+  const slideOrder=[0,1,12,13,2,3,4,5,6,7,8,9,10,11,14,15,16,17,18,19,20,21];
+  slideOrder.forEach(i=>deck.appendChild(originalSlides[i]));
+  const slides=[...deck.querySelectorAll('.slide')];
+  const counter=document.getElementById('counter'), progress=document.getElementById('progress');
+  let index=0, editing=false;
+  document.querySelectorAll('.editable').forEach((el,i)=>{const key=`sdm8-edit-${i}`;const saved=localStorage.getItem(key);if(saved!==null)el.innerHTML=saved;el.addEventListener('input',()=>localStorage.setItem(key,el.innerHTML))});
+  function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===index);const tag=s.querySelector('.page-tag');if(tag)tag.textContent=i===slides.length-1?'END':String(i+1).padStart(2,'0')});counter.textContent=`${index+1} / ${slides.length}`;progress.style.width=`${(index+1)/slides.length*100}%`;location.hash=`slide-${index+1}`}
+  function toggleEdit(){editing=!editing;document.querySelectorAll('.editable').forEach(el=>el.contentEditable=editing);document.getElementById('editBtn').style.background=editing?'var(--coral)':''}
+  document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);
+  document.getElementById('notesBtn').onclick=()=>deck.classList.toggle('show-notes');document.getElementById('editBtn').onclick=toggleEdit;
+  document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+  document.getElementById('helpBtn').onclick=()=>document.getElementById('help').classList.toggle('show');
+  addEventListener('keydown',e=>{if(editing&&e.target.isContentEditable)return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f')document.getElementById('fullBtn').click();if(e.key.toLowerCase()==='n')document.getElementById('notesBtn').click();if(e.key.toLowerCase()==='e')toggleEdit();if(e.key.toLowerCase()==='p')print();if(e.key==='?')document.getElementById('helpBtn').click()});
+  let touchX=0;addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>55)show(index+(d<0?1:-1))},{passive:true});
+  const hash=Number(location.hash.replace('#slide-',''));show(Number.isFinite(hash)&&hash>0?hash-1:0);
+</script>
+</body>
+</html>
