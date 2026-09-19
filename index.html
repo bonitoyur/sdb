@@ -101,6 +101,13 @@
     .fair-body{display:contents}.fair-body h3{order:1;min-height:68px;padding:17px 19px 10px;font-size:clamp(15px,1.14vw,21px);line-height:1.28;margin:0}.fair-list{order:3;display:grid;gap:8px;margin-top:auto;padding:0 19px 16px}.fair-row{display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:start;padding-top:7px;border-top:1px dashed #cfdbd3;font-size:clamp(10px,.76vw,14px);line-height:1.35}.fair-row b{color:var(--forest)}.fair-row strong{font-weight:900;color:var(--ink)}
     .mission{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}.mission-board{background:var(--forest);color:#fff;border-radius:26px;padding:28px 32px}.mission-board ol{padding-left:1.25em}.mission-board li{margin:10px 0}.safety{display:grid;gap:12px}.safety .card{padding:15px 18px;display:flex;align-items:center;gap:14px}.safety .card span{font-size:27px}.safety .card b{font-size:clamp(12px,.95vw,17px)}
     .finish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}.finish{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.20);border-radius:24px;padding:25px}.finish span{font-size:37px}.finish h3{margin:12px 0 6px}.finish p{font-size:clamp(11px,.85vw,15px);color:#d7e8de;margin:0}
+    .roster-slide{padding-top:clamp(28px,3.4vw,54px);padding-bottom:clamp(28px,3.4vw,54px)}
+    .roster-head{display:flex;align-items:end;justify-content:space-between;gap:22px;margin-bottom:18px}.roster-head h2{margin:0}.roster-guide{margin:0;text-align:right;color:var(--muted);font-size:clamp(11px,.86vw,15px);line-height:1.45}
+    .roster-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:13px 15px;height:calc(100% - 104px)}
+    .roster-card{display:flex;flex-direction:column;min-height:0;background:#fff;border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:0 9px 24px rgba(28,64,48,.07)}
+    .roster-card:nth-child(4n+2),.roster-card:nth-child(4n+3){background:#f6faF3}.roster-title{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--forest);color:#fff;font-size:clamp(14px,1.02vw,18px);font-weight:950}.roster-title span{font-size:14px;opacity:.72}
+    .roster-input{flex:1;min-height:0;padding:12px 14px;overflow:auto;outline:none;white-space:pre-wrap;word-break:keep-all;font-size:clamp(12px,.92vw,17px);font-weight:700;line-height:1.48;cursor:text;caret-color:var(--coral);touch-action:pan-y}
+    .roster-input:empty::before{content:attr(data-placeholder);white-space:pre-line;color:#9aa9a1;font-weight:600;pointer-events:none}.roster-input:focus{background:#fffbee;box-shadow:inset 0 0 0 3px rgba(255,217,106,.7)}
     .editable[contenteditable="true"]{outline:2px dashed var(--coral);outline-offset:4px;border-radius:4px;background:rgba(255,131,111,.08)}
     .deck.edit-mode .slide.active{box-shadow:var(--shadow),inset 0 0 0 4px var(--coral)}.deck.edit-mode .slide.active::selection,.deck.edit-mode .slide.active *::selection{background:var(--yellow);color:var(--ink)}.deck.edit-mode .slide.active{cursor:text}.deck.edit-mode .slide.active a{pointer-events:none}
     .controls{position:fixed;z-index:20;left:50%;bottom:15px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(7,30,22,.86);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#fff}
@@ -109,7 +116,7 @@
     .help{position:fixed;right:18px;top:18px;z-index:30;background:#fff;color:var(--ink);padding:12px 16px;border-radius:14px;box-shadow:var(--shadow);font-size:12px;display:none;line-height:1.7}.help.show{display:block}
     .notes{display:none;position:absolute;left:5%;right:5%;bottom:4%;background:rgba(255,255,255,.96);border-left:5px solid var(--yellow);padding:13px 18px;border-radius:10px;color:var(--ink);font-size:clamp(11px,.82vw,15px);box-shadow:0 8px 25px rgba(0,0,0,.15)}.show-notes .active .notes{display:block}
     .page-tag{position:absolute;right:5%;top:5%;font-size:12px;color:#819087;font-weight:800}.forest-slide .page-tag{color:#cfe1d4}
-    @media(max-width:800px){.slide{width:98vw;border-radius:10px;padding:24px}.card{padding:14px}.grid2{gap:18px}.controls{bottom:7px}.phone{transform:scale(.75)}.bin{min-height:140px;padding:10px}.people{gap:8px}.avatar{width:55px;height:55px;font-size:28px}.social-circles{transform:scale(.8)}.schedule-head{margin-bottom:12px}.schedule-grid{gap:8px}.schedule-item{grid-template-columns:36px 58px 1fr;gap:7px;min-height:66px;padding:8px 10px}.schedule-item .round{width:32px;height:32px;font-size:13px}.fair-grid{gap:9px}.fair-visual{height:82px;font-size:42px}.fair-photo{height:96px;margin:0 11px 8px}.fair-body h3{min-height:53px;padding:10px 11px 7px}.fair-list{padding:0 11px 10px}.fair-row{grid-template-columns:45px 1fr;gap:4px} }
+    @media(max-width:800px){.slide{width:98vw;border-radius:10px;padding:24px}.card{padding:14px}.grid2{gap:18px}.controls{bottom:7px}.phone{transform:scale(.75)}.bin{min-height:140px;padding:10px}.people{gap:8px}.avatar{width:55px;height:55px;font-size:28px}.social-circles{transform:scale(.8)}.schedule-head{margin-bottom:12px}.schedule-grid{gap:8px}.schedule-item{grid-template-columns:36px 58px 1fr;gap:7px;min-height:66px;padding:8px 10px}.schedule-item .round{width:32px;height:32px;font-size:13px}.fair-grid{gap:9px}.fair-visual{height:82px;font-size:42px}.fair-photo{height:96px;margin:0 11px 8px}.fair-body h3{min-height:53px;padding:10px 11px 7px}.fair-list{padding:0 11px 10px}.fair-row{grid-template-columns:45px 1fr;gap:4px}.roster-head{margin-bottom:10px}.roster-grid{gap:7px;height:calc(100% - 82px)}.roster-title{padding:7px 9px}.roster-input{padding:8px 9px;line-height:1.35} }
     @media print{html,body{overflow:visible;background:#fff}.deck{display:block;background:#fff}.slide{display:block!important;position:relative;width:297mm;height:167.06mm;max-height:none;page-break-after:always;border-radius:0;box-shadow:none}.controls,.progress,.help,.notes{display:none!important}}
   </style>
 </head>
@@ -202,7 +209,7 @@
     <div class="kicker">WHO WE ARE</div>
     <div class="grid2">
       <div><div class="quote-mark">“</div><div class="quote">우리 동네를<br>조금 더 <span class="marker">깨끗하고 다정하게.</span></div></div>
-      <div><p class="lead">서대문떡잎마을 방범대는<br><b>20–30대 청년들이 함께하는&nbsp;</b></p><p class="lead"><b>지역 봉사 커뮤니티</b>입니다.</p>
+      <div><p class="lead">서대문떡잎마을 방범대는<br><b>우리지역 청년들이 함께하는&nbsp;</b></p><p class="lead"><b>지역 봉사 커뮤니티</b>입니다.</p>
         <div><span class="pill">🌿 플로깅</span><span class="pill">🎨 벽화봉사</span><span class="pill">🌊 환경정화</span><span class="pill">🤝 지역연결</span></div>
         <p class="small" style="margin-top:22px">거창한 영웅보다, 꾸준히 움직이는 이웃이 되는 떡잎마을 방범대</p>
       </div>
@@ -420,16 +427,29 @@
     <div class="finish-grid"><div class="finish"><span>🗑️</span><h3>분류·배출</h3><p>봉투를 한곳에 모아 재질별로 최종 정리해요.</p></div><div class="finish"><span>✅</span><h3>활동 완료</h3><p>앱 기록과 준비물 반납을 확인해요.</p></div><div class="finish"><span>📷</span><h3>단체사진</h3><p>8기의 첫 활동을 다 같이 남겨요.</p></div></div>
     <p class="lead" style="text-align:center;margin-top:40px">첫 활동, 함께해 주셔서 고맙습니다.<br><b>우리 8기, 오래오래 즐겁게 만나요! 🌱</b></p><div class="page-tag">25</div>
     <div class="notes">분실물 확인 → 다음 일정 안내 → 단체사진 순서로 마무리하면 좋습니다.</div>
-  </section><section class="slide forest-slide" data-edit-key="slide-25" contenteditable="false" spellcheck="false">
+  </section><section class="slide forest-slide final-slide" data-edit-key="slide-25" contenteditable="false" spellcheck="false">
     <div style="display:grid;place-items:center;height:100%;text-align:center"><div><div class="seed-logo" style="margin:0 auto 24px">🌱</div><div class="kicker">WELCOME, 8TH MEMBERS</div><h1 style="margin-bottom:22px">이제 진짜<br><span class="marker">서떡방 8기</span>입니다!</h1><p class="lead">질문 · 연락처 · 다음 활동 안내</p><div class="editable" contenteditable="false" style="margin-top:28px;color:#d8ecdf">@sdm_watch</div></div></div><div class="page-tag">END</div>
+  </section><section class="slide roster-slide" data-edit-key="slide-roster" contenteditable="false" spellcheck="false">
+    <div class="roster-head"><div><div class="kicker">TEAM ROSTER</div><h2>8기 조별 명단</h2></div><p class="roster-guide">각 칸을 클릭해 이름을 입력하세요.<br>Enter로 줄을 바꿀 수 있으며 자동 저장됩니다.</p></div>
+    <div class="roster-grid">
+      <div class="roster-card"><div class="roster-title">1조 <span>🌱</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">2조 <span>🌿</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">3조 <span>☘️</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">4조 <span>🍀</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">5조 <span>🌳</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">6조 <span>🌼</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">7조 <span>🌻</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+      <div class="roster-card"><div class="roster-title">8조 <span>🌲</span></div><div class="roster-input" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="이름을 입력하세요&#10;한 줄에 한 명씩"></div></div>
+    </div><div class="page-tag">29</div>
+    <div class="notes">조 편성이 끝나면 각 칸에 대원 이름을 입력한 뒤 하단 💾 버튼으로 명단이 포함된 HTML을 저장하세요.</div>
   </section></main>
 
 <div class="controls" aria-label="발표 컨트롤">
-  <button id="prev" title="이전 (←)">←</button><span class="counter" id="counter">1 / 28</span><button id="next" title="다음 (→)">→</button>
+  <button id="prev" title="이전 (←)">←</button><span class="counter" id="counter">1 / 29</span><button id="next" title="다음 (→)">→</button>
   <button id="notesBtn" title="발표자 메모 (N)">N</button><button id="editBtn" title="모든 텍스트 편집 (E)" style="background: var(--coral);">✎</button><button id="saveBtn" title="수정본 HTML 저장 (Ctrl+S)">💾</button><button id="fullBtn" title="전체화면 (F)">⛶</button><button id="helpBtn" title="도움말 (?)">?</button>
 </div>
 <div class="progress" id="progress" style="width: 3.84615%;"></div>
-<div class="help" id="help"><b>발표 조작</b><br>← → / Space : 슬라이드 이동<br>F : 전체화면<br>N : 발표자 메모<br>E : 현재 장표의 모든 텍스트 편집<br>사진 이동 : 편집 모드에서 사진을 드래그<br>사진 크기 : 우측 아래 흰색 모서리를 드래그<br>Esc 또는 E : 편집 종료<br>Ctrl+S 또는 💾 : 수정본 HTML 저장<br>Home / End : 처음 / 마지막<br>P : 인쇄·PDF 저장<br><br>편집 내용과 사진 배치는 브라우저에 자동 저장됩니다.<br>파일로 남기려면 💾 버튼을 눌러주세요.</div>
+<div class="help" id="help"><b>발표 조작</b><br>← → / Space : 슬라이드 이동<br>F : 전체화면<br>N : 발표자 메모<br>E : 현재 장표의 모든 텍스트 편집<br>조별 명단 : 마지막 장표의 각 칸을 클릭해 바로 입력<br>사진 이동 : 편집 모드에서 사진을 드래그<br>사진 크기 : 우측 아래 흰색 모서리를 드래그<br>Esc 또는 E : 편집 종료<br>Ctrl+S 또는 💾 : 수정본 HTML 저장<br>Home / End : 처음 / 마지막<br>P : 인쇄·PDF 저장<br><br>편집 내용과 조별 명단은 브라우저에 자동 저장됩니다.<br>파일로 남기려면 💾 버튼을 눌러주세요.</div>
 
 <script>
   const deck=document.getElementById('deck');
@@ -437,12 +457,13 @@
   const storagePrefix='sdm8-export-1789628378982-';
   document.querySelectorAll('.editable').forEach((el,i)=>{const old=localStorage.getItem(`sdm8-edit-${i}`);if(old!==null)el.innerHTML=old});
   originalSlides.forEach((slide,i)=>{slide.dataset.editKey=`slide-${i}`;const saved=localStorage.getItem(storagePrefix+slide.dataset.editKey);if(saved!==null)slide.innerHTML=saved;slide.contentEditable='false';slide.spellcheck=false;slide.addEventListener('input',()=>{if(editing)saveSlide(slide)})});
-  const slideOrder=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27];
+  const slideOrder=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28];
   slideOrder.forEach(i=>deck.appendChild(originalSlides[i]));
   const slides=[...deck.querySelectorAll('.slide')];
   const counter=document.getElementById('counter'), progress=document.getElementById('progress');
   let index=0, editing=false, suppressSwipeUntil=0;
   function saveSlide(slide){try{localStorage.setItem(storagePrefix+slide.dataset.editKey,slide.innerHTML)}catch(err){console.warn('편집 내용을 저장하지 못했습니다.',err)}}
+  document.querySelectorAll('.roster-input').forEach(field=>{field.contentEditable='true';field.spellcheck=false;field.addEventListener('input',()=>saveSlide(field.closest('.slide')))});
   function preparePhotoStages(){
     const presets=[
       [{left:0,top:0,width:35,height:100},{left:37,top:0,width:63,height:48},{left:37,top:52,width:63,height:48}],
@@ -491,15 +512,15 @@
     });
   }
   preparePhotoStages();
-  function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===index);const tag=s.querySelector('.page-tag');if(tag)tag.textContent=i===slides.length-1?'END':String(i+1).padStart(2,'0')});counter.textContent=`${index+1} / ${slides.length}`;progress.style.width=`${(index+1)/slides.length*100}%`;location.hash=`slide-${index+1}`}
-  function toggleEdit(){editing=!editing;slides.forEach(slide=>{slide.contentEditable=editing?'true':'false';slide.querySelectorAll('[contenteditable]').forEach(el=>el.contentEditable=editing?'true':'false')});deck.classList.toggle('edit-mode',editing);document.getElementById('editBtn').style.background=editing?'var(--coral)':'';if(editing)slides[index].focus()}
-  function downloadEditedHtml(){const clone=document.documentElement.cloneNode(true);clone.querySelector('#deck').classList.remove('edit-mode','show-notes');clone.querySelectorAll('.slide').forEach((slide,i)=>{slide.contentEditable='false';slide.querySelectorAll('[contenteditable]').forEach(el=>el.contentEditable='false');slide.classList.toggle('active',i===index)});let html='<!doctype html>\n'+clone.outerHTML;html=html.replace(/const slideOrder=\[[^\]]+\];/,`const slideOrder=[${slides.map((_,i)=>i).join(',')}];`);html=html.replace(/const storagePrefix='[^']+';/,`const storagePrefix='sdm8-export-${Date.now()}-';`);const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='sdmwatch_8th_ot_presentation_edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  function show(n){index=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===index);const tag=s.querySelector('.page-tag');if(tag)tag.textContent=s.classList.contains('final-slide')?'END':String(i+1).padStart(2,'0')});counter.textContent=`${index+1} / ${slides.length}`;progress.style.width=`${(index+1)/slides.length*100}%`;location.hash=`slide-${index+1}`}
+  function toggleEdit(){editing=!editing;slides.forEach(slide=>{slide.contentEditable=editing?'true':'false';slide.querySelectorAll('[contenteditable]').forEach(el=>el.contentEditable=el.classList.contains('roster-input')?'true':editing?'true':'false')});deck.classList.toggle('edit-mode',editing);document.getElementById('editBtn').style.background=editing?'var(--coral)':'';if(editing)slides[index].focus()}
+  function downloadEditedHtml(){const clone=document.documentElement.cloneNode(true);clone.querySelector('#deck').classList.remove('edit-mode','show-notes');clone.querySelectorAll('.slide').forEach((slide,i)=>{slide.contentEditable='false';slide.querySelectorAll('[contenteditable]').forEach(el=>el.contentEditable=el.classList.contains('roster-input')?'true':'false');slide.classList.toggle('active',i===index)});let html='<!doctype html>\n'+clone.outerHTML;html=html.replace(/const slideOrder=\[[^\]]+\];/,`const slideOrder=[${slides.map((_,i)=>i).join(',')}];`);html=html.replace(/const storagePrefix='[^']+';/,`const storagePrefix='sdm8-export-${Date.now()}-';`);const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='sdmwatch_8th_ot_presentation_edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
   document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);
   document.getElementById('notesBtn').onclick=()=>deck.classList.toggle('show-notes');document.getElementById('editBtn').onclick=toggleEdit;
   document.getElementById('saveBtn').onclick=downloadEditedHtml;
   document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
   document.getElementById('helpBtn').onclick=()=>document.getElementById('help').classList.toggle('show');
-  addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();downloadEditedHtml();return}if(editing){if(e.key==='Escape'||e.key.toLowerCase()==='e'){e.preventDefault();toggleEdit()}return}if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f')document.getElementById('fullBtn').click();if(e.key.toLowerCase()==='n')document.getElementById('notesBtn').click();if(e.key.toLowerCase()==='e')toggleEdit();if(e.key.toLowerCase()==='p')print();if(e.key==='?')document.getElementById('helpBtn').click()});
+  addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();downloadEditedHtml();return}const rosterField=e.target.closest?.('.roster-input');if(rosterField){if(e.key==='Escape'){e.preventDefault();rosterField.blur()}return}if(editing){if(e.key==='Escape'||e.key.toLowerCase()==='e'){e.preventDefault();toggleEdit()}return}if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(index+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f')document.getElementById('fullBtn').click();if(e.key.toLowerCase()==='n')document.getElementById('notesBtn').click();if(e.key.toLowerCase()==='e')toggleEdit();if(e.key.toLowerCase()==='p')print();if(e.key==='?')document.getElementById('helpBtn').click()});
   let touchX=0;addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX,{passive:true});addEventListener('touchend',e=>{if(Date.now()<suppressSwipeUntil)return;const d=e.changedTouches[0].screenX-touchX;if(Math.abs(d)>55)show(index+(d<0?1:-1))},{passive:true});
   const hash=Number(location.hash.replace('#slide-',''));show(Number.isFinite(hash)&&hash>0?hash-1:0);
 </script>
